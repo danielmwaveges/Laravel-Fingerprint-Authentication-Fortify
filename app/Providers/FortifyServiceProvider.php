@@ -13,6 +13,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 
+use Laravel\Fortify\Contracts\RegisterResponse;
+use App\Http\Controllers\WebAuthn\WebAuthnRegisterController;
+use Laragear\WebAuthn\Http\Requests\AttestationRequest;
+
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
@@ -20,7 +24,12 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse{
+            public function toResponse($request)
+            {
+                return redirect('/register_biometric');
+            }
+        });
     }
 
     /**
@@ -32,6 +41,14 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        Fortify::registerView(function () {
+            return view('register');
+        });
+
+        Fortify::loginView(function () {
+            return view('login');
+        });
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());

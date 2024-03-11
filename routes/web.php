@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebAuthn\WebAuthnLoginController;
+use App\Http\Controllers\WebAuthn\WebAuthnRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
+
+Route::get('/register_biometric', function () {
+     return view('register_biometric');
+ })->name('register_biometric');
+ 
+Route::get('/login_biometric', function () {
+     return view('login_biometric');
+ })->name('login_biometric');
+ 
+
+
+// WebAuthn Routes
+Route::post('webauthn/register/options', [WebAuthnRegisterController::class, 'options'])
+     ->name('webauthn.register.options');
+Route::post('webauthn/register', [WebAuthnRegisterController::class, 'register'])
+     ->name('webauthn.register');
+
+Route::post('webauthn/login/options', [WebAuthnLoginController::class, 'options'])
+     ->name('webauthn.login.options');
+Route::post('webauthn/login', [WebAuthnLoginController::class, 'login'])
+     ->name('webauthn.login');
