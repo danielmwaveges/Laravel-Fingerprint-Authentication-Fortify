@@ -13,14 +13,21 @@
 
 <script>
     const attest = async () => {
+        if (Webpass.isUnsupported()) {
+            alert("Your browser doesn't support WebAuthn.")
+        }
+
         const { success, data, error } = await Webpass.attest("webauthn/register/options", "webauthn/register/")
         
         if (error) {
             alert(error.message)
         }
-        console.log(data)
+        
+        if (success) {
+            alert("Biometric registration successful")
+            window.location.replace("/")
+        }
     }
-    const assert = async () => await Webpass.assert("webauthn/login/options", "webauthn/login/")
 </script>
 </head>
 

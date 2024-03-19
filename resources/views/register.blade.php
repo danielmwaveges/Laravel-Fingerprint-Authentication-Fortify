@@ -55,6 +55,9 @@
                     <button name="submit" type="submit" class="flex w-full justify-center rounded-md bg-carmen-pink px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-light-carmen-pink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-carmen-pink">Register</button>
                 </div>
             </form>
+            <p class="mt-5 text-center text-sm text-gray-500">
+                Already have an account? <a href="{{ url('/login') }}" class="font-semibold leading-6 text-carmen-pink hover:text-light-carmen-pink">Sign in here</a>
+            </p>
         </div>
     </div>
 </body>

@@ -17,7 +17,7 @@ use App\Http\Controllers\WebAuthn\WebAuthnRegisterController;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+})->name('welcome')->middleware('auth');
 
 Route::get('/register_biometric', function () {
      return view('register_biometric');

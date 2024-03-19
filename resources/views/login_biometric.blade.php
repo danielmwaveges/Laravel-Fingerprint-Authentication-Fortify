@@ -61,6 +61,10 @@
 
 <script>
     const assert = async () => {
+        if (Webpass.isUnsupported()) {
+            alert("Your browser doesn't support WebAuthn.")
+        }
+
         const { success, data, error } = await Webpass.assert({
             path: "webauthn/login/options",
             body: {
@@ -72,6 +76,10 @@
 
         if (error) {
             alert("An error has occured while processing your log in request. Please ensure the email address you have entered is valid and was previously registered with a biometric credential.")
+        }
+
+        if (success) {
+            window.location.replace("/")
         }
     }
 

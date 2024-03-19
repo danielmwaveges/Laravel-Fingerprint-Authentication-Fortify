@@ -36,6 +36,6 @@ class WebAuthnRegisterController
         $request->save();
         
         //return to welcome page
-        return response()->view('welcome');
+        return response('Now you can login without passwords!');
     }
 }

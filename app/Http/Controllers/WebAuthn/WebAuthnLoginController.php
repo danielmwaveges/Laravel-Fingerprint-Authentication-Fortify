@@ -22,7 +22,7 @@ class WebAuthnLoginController
         
         $challenge = $request->toVerify($request->validate(['email' => 'sometimes|email|string']));
         
-        return $request->toVerify(1);
+        return $challenge;
     }
 
     /**
@@ -36,6 +36,6 @@ class WebAuthnLoginController
         $user = $request->login();
         
         //redirect to homepage
-        return $user ? response()->view('welcome') : response('Something went wrong, try again!');
+        return $user ? response("Welcome back, $user->name") : response('Something went wrong, try again!');
     }
 }
