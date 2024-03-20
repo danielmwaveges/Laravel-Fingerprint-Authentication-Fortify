@@ -32,6 +32,8 @@ Navigate to localhost:8000 in your browser to access the application.
 ### Issues
 An [issue](https://github.com/Laragear/webpass/issues/10) with the Laragear WebPass package has been discovered whereby the credential returned by an authenticator is incorrectly evaluated as empty thereby failing the attestation and assertion ceremonies. This issue is being raised to the authors of the package while a work around solution is developed.
 
+***Update**: The issue has been solved by the package author and now WebAuthn authentication works as expected*
+
 
 
 
